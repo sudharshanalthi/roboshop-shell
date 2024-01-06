@@ -93,7 +93,7 @@ else
 
     VALIDATE $? "Installing MongoDB client"
 
-    mongo --host mongodb.daws76.com </app/schema/catalogue.js &>> $LOGFILE
+    mongo --host 172.31.47.139 </app/schema/catalogue.js &>> $LOGFILE
 
     VALIDATE $? "Loading catalogue data into MongoDB"
 
