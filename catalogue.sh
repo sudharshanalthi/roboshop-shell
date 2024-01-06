@@ -4,7 +4,6 @@ ID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 N="\e[0m"
-MONGDB_HOST=mongodb.daws76.com
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -94,7 +93,7 @@ else
 
     VALIDATE $? "Installing MongoDB client"
 
-    mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
+    mongo --host mongodb.daws76.com </app/schema/catalogue.js &>> $LOGFILE
 
     VALIDATE $? "Loading catalogue data into MongoDB"
 
