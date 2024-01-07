@@ -81,7 +81,7 @@ else
 
     VALIDATE $? "install MySQL client"
 
-    mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
+    mysql -h 172.31.32.117 -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
     
     VALIDATE $? "loading shipping data"
 
