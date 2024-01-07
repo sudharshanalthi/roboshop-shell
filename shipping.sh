@@ -28,6 +28,8 @@ else
        echo "you are root user"
     fi # fi means reverse of if, indicating condition end
 
+    dnf install maven -y &>> $LOGFILE
+
     id roboshop
     if [ $? -ne 0 ]
     then
@@ -63,7 +65,7 @@ else
 
     cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
 
-    VALIDATE $? "copying shipping serice"
+    VALIDATE $? "copying shipping service"
 
     systemctl daemon-reload &>> $LOGFILE
 
