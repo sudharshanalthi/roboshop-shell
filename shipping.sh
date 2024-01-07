@@ -49,7 +49,7 @@ else
 
     VALIDATE $? "moving to app directory"
 
-    unzip /tmp/shipping.zip &>> $LOGFILE
+    unzip -o /tmp/shipping.zip &>> $LOGFILE
 
     VALIDATE $? "unzipping shipping" 
 
