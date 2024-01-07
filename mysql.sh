@@ -32,23 +32,23 @@ else
 
     VALIDATE $? "Disable current MySQL version" 
 
-    cp mysql.repo /etc/yum.repos.d/mysql.repo
+    cp mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
 
     VALIDATE $? "copied MySQL repo" 
 
-    dnf install mysql-community-server -y
+    dnf install mysql-community-server -y &>> $LOGFILE
 
     VALIDATE $? "Installing Mysql Server" 
 
-    systemctl enable mysqld
+    systemctl enable mysqld &>> $LOGFILE
 
     VALIDATE $? "Enabling Mysql Server" 
 
-    systemctl start mysqld
+    systemctl start mysqld &>> $LOGFILE
 
     VALIDATE $? "Starting Mysql Server" 
 
-    mysql_secure_installation --set-root-pass RoboShop@1
+    mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGFILE
 
     VALIDATE $? "Starting Mysql root password" 
 
