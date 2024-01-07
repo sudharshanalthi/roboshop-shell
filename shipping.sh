@@ -41,26 +41,50 @@ else
 
     VALIDATE $? "creating app directory" 
 
-    curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip
+    curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
+
+    VALIDATE $? "Downloading shipping"
 
     cd /app
 
-    unzip /tmp/shipping.zip
+    VALIDATE $? "moving to app directory"
 
-    mvn clean package
+    unzip /tmp/shipping.zip &>> $LOGFILE
 
-    mv target/shipping-1.0.jar shipping.jar
+    VALIDATE $? "unzipping shipping" 
 
-    cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
+    mvn clean package &>> $LOGFILE
 
-    systemctl daemon-reload
+    VALIDATE $? "Installing dependencies"
 
-    systemctl enable shipping 
+    mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 
-    systemctl start shipping
+    VALIDATE $? "renaming jar file"
 
-    dnf install mysql -y
+    cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
 
-    mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+    VALIDATE $? "copying shipping serice"
 
-    systemctl restart shipping
+    systemctl daemon-reload &>> $LOGFILE
+
+    VALIDATE $? "demon reload"
+
+    systemctl enable shipping  &>> $LOGFILE
+
+    VALIDATE $? "enable shipping"
+
+    systemctl start shipping &>> $LOGFILE
+
+    VALIDATE $? "start shipping"
+
+    dnf install mysql -y &>> $LOGFILE
+
+    VALIDATE $? "install MySQL client"
+
+    mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
+    
+    VALIDATE $? "loading shipping data"
+
+    systemctl restart shipping &>> $LOGFILE
+
+    VALIDATE $? "restart shipping"
