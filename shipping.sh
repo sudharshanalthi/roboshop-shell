@@ -67,7 +67,7 @@ else
 
     systemctl daemon-reload &>> $LOGFILE
 
-    VALIDATE $? "demon reload"
+    VALIDATE $? "daemon reload"
 
     systemctl enable shipping  &>> $LOGFILE
 
