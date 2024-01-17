@@ -15,3 +15,5 @@ do
     fi
 
    aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids $SG_ID 
+   done
+   
